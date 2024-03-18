@@ -1,5 +1,5 @@
 exports.baseRules = {
-    complexity: ['error', { max: 40 }],
+    complexity: ['error', { max: 20 }],
     curly: ['error', 'multi-line'],
     'import/no-cycle': 'error',
     'import/no-self-import': 'error',
