@@ -1,8 +1,4 @@
 exports.baseRules = {
-    // code readability
-    complexity: ['error', { max: 20 }],
-    'max-lines-per-function': ['error', 80],
-
     curly: ['error', 'multi-line'],
     'import/no-cycle': 'error',
     'import/no-self-import': 'error',
