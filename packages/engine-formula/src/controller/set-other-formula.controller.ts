@@ -23,12 +23,14 @@ import {
     type IOtherFormulaManagerSearchParam,
     IOtherFormulaManagerService,
 } from '../services/other-formula-manager.service';
+import { IDependencyManagerService } from '../services/dependency-manager.service';
 
 @OnLifecycle(LifecycleStages.Ready, SetOtherFormulaController)
 export class SetOtherFormulaController extends Disposable {
     constructor(
         @ICommandService private readonly _commandService: ICommandService,
-        @IOtherFormulaManagerService private readonly _otherFormulaManagerService: IOtherFormulaManagerService
+        @IOtherFormulaManagerService private readonly _otherFormulaManagerService: IOtherFormulaManagerService,
+        @IDependencyManagerService private readonly _dependencyManagerService: IDependencyManagerService
     ) {
         super();
 
@@ -55,6 +57,7 @@ export class SetOtherFormulaController extends Disposable {
                         return;
                     }
 
+                    this._dependencyManagerService.removeOtherFormulaDependency(params.unitId, params.subUnitId, params.formulaId);
                     this._otherFormulaManagerService.remove(params);
                 }
             })
