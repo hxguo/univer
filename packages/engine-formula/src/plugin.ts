@@ -55,6 +55,7 @@ import { IOtherFormulaManagerService, OtherFormulaManagerService } from './servi
 import { FormulaRuntimeService, IFormulaRuntimeService } from './services/runtime.service';
 import { ISuperTableService, SuperTableService } from './services/super-table.service';
 import { DependencyManagerService, IDependencyManagerService } from './services/dependency-manager.service';
+import { SetDependencyController } from './controller/set-dependency.controller';
 
 const PLUGIN_NAME = 'base-formula-engine';
 
@@ -116,6 +117,7 @@ export class UniverFormulaEnginePlugin extends Plugin {
                 [SetOtherFormulaController],
                 [SetSuperTableController],
                 [RegisterFunctionController],
+                [SetDependencyController],
 
                 // Calculation engine
                 [FormulaDependencyGenerator],
