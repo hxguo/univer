@@ -18,6 +18,8 @@ import { installShims } from './common/shims';
 
 export { shallowEqual, isRangesEqual, isUnitRangesEqual } from './common/equal';
 export * from './basics';
+export { isNumeric, isSafeNumeric } from './common/number';
+export { isBooleanString } from './common/boolean';
 export { dedupe, remove, rotate, groupBy } from './common/array';
 export { mergeSets } from './common/set';
 export {
@@ -160,7 +162,7 @@ export { getSheetBlocksFromSnapshot } from './services/snapshot/snapshot-transfo
 export { isBlackColor, isWhiteColor } from './shared/color/color-kit';
 export { cellToRange } from './shared/common';
 export { Worksheet, extractPureTextFromCell } from './sheets/worksheet';
-export type { IAutoFilter, IFilterColumn, ICustomFilters, ICustomFilter } from './types/interfaces/i-filter';
+export type { IAutoFilter, IFilterColumn, IFilters, ICustomFilters, ICustomFilter } from './types/interfaces/i-filter';
 export { CustomFilterOperator } from './types/interfaces/i-filter';
 
 // #endregion
