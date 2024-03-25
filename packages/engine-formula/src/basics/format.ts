@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-import type { IContextService } from '@univerjs/core';
-import { FOCUSING_DOC, FOCUSING_UNIVER_EDITOR, FOCUSING_UNIVER_EDITOR_STANDALONE_SINGLE_MODE } from '@univerjs/core';
+// @ts-ignore
+import numfmt from 'numfmt';
 
-export function whenEditorStandalone(contextService: IContextService) {
-    return (
-        contextService.getContextValue(FOCUSING_DOC) &&
-        contextService.getContextValue(FOCUSING_UNIVER_EDITOR) &&
-        contextService.getContextValue(FOCUSING_UNIVER_EDITOR_STANDALONE_SINGLE_MODE)
-    );
-}
+/**
+ * covert number to preview string by pattern
+ * @TODODushusir: Internationalization, reuse with numfmt
+ *
+ * @param pattern
+ * @param value
+ * @returns
+ */
+export const getFormatPreview = (pattern: string, value: number) => {
+    return numfmt.format(pattern, value);
+};
