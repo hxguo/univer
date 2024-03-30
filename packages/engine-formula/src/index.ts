@@ -145,3 +145,5 @@ export { IFormulaRuntimeService, FormulaRuntimeService } from './services/runtim
 export { IFormulaCurrentConfigService, FormulaCurrentConfigService } from './services/current-data.service';
 
 export { IActiveDirtyManagerService } from './services/active-dirty-manager.service';
+
+export type { IExchangePosition } from './models/formula-data.model';
