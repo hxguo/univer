@@ -16,7 +16,7 @@
 
 import type { ICommandInfo, IMutationInfo, IObjectArrayPrimitiveType, Nullable } from '@univerjs/core';
 import { Disposable, DisposableCollection, ICommandService, IUniverInstanceService, LifecycleStages, moveMatrixArray, OnLifecycle } from '@univerjs/core';
-import type { EffectRefRangeParams, IAddWorksheetMergeMutationParams, IInsertColCommandParams, IInsertRowCommandParams, IMoveColsCommandParams, IMoveRowsCommandParams, IMoveRowsMutationParams, IRemoveColMutationParams, IRemoveRowsMutationParams, ISetWorksheetActivateCommandParams, ISheetCommandSharedParams } from '@univerjs/sheets';
+import type { EffectRefRangeParams, IAddWorksheetMergeMutationParams, IInsertColCommandParams, IInsertRowCommandParams, IMoveColsCommandParams, IMoveRowsCommandParams, IRemoveColMutationParams, IRemoveRowsMutationParams, ISetWorksheetActivateCommandParams, ISheetCommandSharedParams } from '@univerjs/sheets';
 import { EffectRefRangId, InsertColCommand, InsertColMutation, InsertRowCommand, InsertRowMutation, INTERCEPTOR_POINT, RefRangeService, RemoveColCommand, RemoveColMutation, RemoveRowCommand, RemoveRowMutation, SetWorksheetActivateCommand, SheetInterceptorService } from '@univerjs/sheets';
 import { Inject } from '@wendellhu/redi';
 
@@ -24,9 +24,9 @@ import { SheetsFilterService } from '../services/sheet-filter.service';
 import type { IRemoveSheetsFilterMutationParams, ISetSheetsFilterCriteriaMutationParams, ISetSheetsFilterRangeMutationParams } from '../commands/sheets-filter.mutation';
 import { ReCalcSheetsFilterMutation, RemoveSheetsFilterMutation, SetSheetsFilterCriteriaMutation, SetSheetsFilterRangeMutation } from '../commands/sheets-filter.mutation';
 import type { FilterColumn } from '../models/filter-model';
+import { mergeSetFilterCriteria } from '../util';
 
 const mutationIdByRowCol = [InsertColMutation.id, InsertRowMutation.id, RemoveColMutation.id, RemoveRowMutation.id];
-type IMoveRowsOrColsMutationParams = IMoveRowsMutationParams;
 
 @OnLifecycle(LifecycleStages.Ready, SheetsFilterController)
 export class SheetsFilterController extends Disposable {
@@ -181,7 +181,7 @@ export class SheetsFilterController extends Disposable {
         redos.push(...moveRedos);
         undos.push(...moveUndos);
 
-        return { redos, undos };
+        return { redos: mergeSetFilterCriteria(redos), undos: mergeSetFilterCriteria(undos) };
     }
 
     private _handleInsertRowCommand(config: IInsertRowCommandParams, unitId: string, subUnitId: string) {
@@ -215,7 +215,7 @@ export class SheetsFilterController extends Disposable {
         redos.push({ id: SetSheetsFilterRangeMutation.id, params: setFilterRangeParams });
         undos.push({ id: SetSheetsFilterRangeMutation.id, params: undoSetFilterRangeMutationParams });
         return {
-            redos, undos,
+            redos: mergeSetFilterCriteria(redos), undos: mergeSetFilterCriteria(undos),
         };
     }
 
@@ -289,8 +289,8 @@ export class SheetsFilterController extends Disposable {
 
         undos.push({ id: SetSheetsFilterRangeMutation.id, params: { range: filterRange, unitId, subUnitId } });
         return {
-            undos,
-            redos,
+            undos: mergeSetFilterCriteria(undos),
+            redos: mergeSetFilterCriteria(redos),
         };
     }
 
@@ -342,8 +342,8 @@ export class SheetsFilterController extends Disposable {
         }
         undos.push({ id: SetSheetsFilterRangeMutation.id, params: { range: filterRange, unitId, subUnitId } });
         return {
-            undos,
-            redos,
+            undos: mergeSetFilterCriteria(undos),
+            redos: mergeSetFilterCriteria(redos),
         };
     }
 

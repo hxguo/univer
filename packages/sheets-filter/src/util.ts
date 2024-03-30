@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+import type { IMutationInfo, Nullable } from '@univerjs/core';
+import type { ISetSheetsFilterCriteriaMutationParams } from '.';
+import { SetSheetsFilterCriteriaMutation } from '.';
+
 interface ILine {
     start: number;
     end: number;
@@ -24,4 +28,27 @@ export function lineIntersect(line1: ILine, line2: ILine): boolean {
 
 export function lineContains(line1: ILine, line2: ILine): boolean {
     return line1.start <= line2.start && line1.end >= line2.end;
+}
+
+export function objectsShaker<T>(target: Nullable<T>[], isEqual: (o1: T, o2: T) => boolean) {
+    for (let i = 0; i < target.length; i++) {
+        let cur = i;
+        if (target[i]) {
+            for (let j = i + 1; j < target.length; j++) {
+                if (target[cur] && target[j] && isEqual(target[cur]!, target[j]!)) {
+                    target[cur] = null;
+                    cur = j;
+                }
+            }
+        }
+    }
+    return target.filter((o) => o !== null);
+};
+
+export function mergeSetFilterCriteria(mutations: IMutationInfo[]) {
+    return objectsShaker(mutations, (o1, o2) =>
+        o1.id === SetSheetsFilterCriteriaMutation.id && o2.id === SetSheetsFilterCriteriaMutation.id
+    && (o1.params as ISetSheetsFilterCriteriaMutationParams).unitId === (o2.params as ISetSheetsFilterCriteriaMutationParams).unitId
+    && (o1.params as ISetSheetsFilterCriteriaMutationParams).subUnitId === (o2.params as ISetSheetsFilterCriteriaMutationParams).subUnitId
+    && (o1.params as ISetSheetsFilterCriteriaMutationParams).col === (o2.params as ISetSheetsFilterCriteriaMutationParams).col);
 }
