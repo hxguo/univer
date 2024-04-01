@@ -42,7 +42,7 @@ export function objectsShaker<T>(target: Nullable<T>[], isEqual: (o1: T, o2: T) 
             }
         }
     }
-    return target.filter((o) => o !== null);
+    return target.filter((o) => o !== null) as T[];
 };
 
 export function mergeSetFilterCriteria(mutations: IMutationInfo[]) {
