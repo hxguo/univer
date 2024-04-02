@@ -17,8 +17,8 @@
 import type { ITextStyle } from '@univerjs/core';
 import { BaselineOffset, BooleanNumber, ColorKit } from '@univerjs/core';
 
-export function extractNodeStyle(node: HTMLElement): ITextStyle {
-    const styles = node.style;
+export function extractNodeStyle(node: HTMLElement, predefinedStyles?: CSSStyleDeclaration): ITextStyle {
+    const styles = predefinedStyles ?? node.style;
     const docStyles: ITextStyle = {};
     const tagName = node.tagName.toLowerCase();
 
