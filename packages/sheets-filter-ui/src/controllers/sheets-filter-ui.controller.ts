@@ -27,6 +27,8 @@ import { IRenderManagerService } from '@univerjs/engine-render';
 import { FILTER_MUTATIONS, ReCalcSheetsFilterMutation, RemoveSheetsFilterMutation, SetSheetsFilterCriteriaMutation, SetSheetsFilterRangeMutation, SheetsFilterService } from '@univerjs/sheets-filter';
 import { ISelectionRenderService, SelectionShape, SHEET_VIEW_KEY, SheetCanvasPopManagerService, SheetRenderController, SheetSkeletonManagerService } from '@univerjs/sheets-ui';
 import type { ISelectionStyle, ISheetCommandSharedParams } from '@univerjs/sheets';
+import { FilterSingle } from '@univerjs/icons';
+
 import { ClearSheetsFilterCriteriaCommand, ReCalcSheetsFilterConditionsCommand, SetSheetsFilterCriteriaCommand, SmartToggleSheetsFilterCommand } from '../commands/sheets-filter.command';
 import { FilterPanel } from '../views/components/SheetsFilterPanel';
 import type { IOpenFilterPanelOperationParams } from '../commands/sheets-filter.operation';
@@ -34,7 +36,7 @@ import { ChangeFilterByOperation, CloseFilterPanelOperation, FILTER_PANEL_OPENED
 import { FilterButtonExtension } from '../views/extensions/filter-button.extension';
 import { SheetsFilterPanelService } from '../services/sheets-filter-panel.service';
 import { OpenFilterPanelOnCurrentSelectionShortcut, SmartToggleFilterShortcut } from './sheets-filter.shortcut';
-import { ClearFilterConditionsMenuItemFactory, ReCalcFilterMenuItemFactory, SmartToggleFilterMenuItemFactory } from './sheets-filter.menu';
+import { ClearFilterCriteriaMenuItemFactory, ReCalcFilterMenuItemFactory, SmartToggleFilterMenuItemFactory } from './sheets-filter.menu';
 
 export const FILTER_PANEL_POPUP_KEY = 'FILTER_PANEL_POPUP';
 
@@ -112,13 +114,14 @@ export class SheetsFilterUIController extends RxDisposable {
     private _initMenuItems(): void {
         ([
             SmartToggleFilterMenuItemFactory,
-            ClearFilterConditionsMenuItemFactory,
+            ClearFilterCriteriaMenuItemFactory,
             ReCalcFilterMenuItemFactory,
         ] as IMenuItemFactory[]).forEach((factory) => this.disposeWithMe(this._menuService.addMenuItem(this._injector.invoke(factory))));
     }
 
     private _initUI(): void {
         this.disposeWithMe(this._componentManager.register(FILTER_PANEL_POPUP_KEY, FilterPanel));
+        this.disposeWithMe(this._componentManager.register('FilterSingle', FilterSingle));
         this.disposeWithMe(this._contextService.subscribeContextValue$(FILTER_PANEL_OPENED_KEY)
             .pipe(distinctUntilChanged())
             .subscribe((open) => {

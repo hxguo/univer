@@ -30,23 +30,22 @@ export function SmartToggleFilterMenuItemFactory(accessor: IAccessor): IMenuSele
         id: SmartToggleSheetsFilterCommand.id,
         group: MenuGroup.TOOLBAR_OTHERS,
         type: MenuItemType.BUTTON_SELECTOR,
-        icon: 'BrushSingle',
-        tooltip: 'filter.toolbar.smart-toggle-filter-tooltip',
+        icon: 'FilterSingle',
+        tooltip: 'sheets-filter.toolbar.smart-toggle-filter-tooltip',
         positions: [MenuPosition.TOOLBAR_START],
         hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.SHEET),
         activated$: sheetsFilterService.activeFilterModel$.pipe(map((model) => !!model)),
     };
 }
 
-export function ClearFilterConditionsMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
+export function ClearFilterCriteriaMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
     const sheetsFilterService = accessor.get(SheetsFilterService);
 
     return {
         id: ClearSheetsFilterCriteriaCommand.id,
         group: MenuGroup.TOOLBAR_OTHERS,
         type: MenuItemType.BUTTON,
-        icon: 'ClearFilterCondition',
-        title: 'filter.toolbar.clear-filter-conditions',
+        title: 'sheets-filter.toolbar.clear-filter-criteria',
         positions: [SmartToggleSheetsFilterCommand.id],
         hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.SHEET),
         disabled$: sheetsFilterService.activeFilterModel$.pipe(switchMap((model) => model?.hasCriteria$.pipe(map((m) => !m)) ?? of(true))),
@@ -60,8 +59,7 @@ export function ReCalcFilterMenuItemFactory(accessor: IAccessor): IMenuButtonIte
         id: ReCalcSheetsFilterConditionsCommand.id,
         group: MenuGroup.TOOLBAR_OTHERS,
         type: MenuItemType.BUTTON,
-        icon: 'ReCalcFilter',
-        title: 'filter.toolbar.re-calc-filter-conditions',
+        title: 'sheets-filter.toolbar.re-calc-filter-conditions',
         positions: [SmartToggleSheetsFilterCommand.id],
         hidden$: getMenuHiddenObservable(accessor, UniverInstanceType.SHEET),
         disabled$: sheetsFilterService.activeFilterModel$.pipe(switchMap((model) => model?.hasCriteria$.pipe(map((m) => !m)) ?? of(true))),

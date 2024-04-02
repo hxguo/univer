@@ -24,7 +24,7 @@ import { Injector } from '@wendellhu/redi';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { ClearSheetsFilterCriteriaCommand, ReCalcSheetsFilterConditionsCommand, SmartToggleSheetsFilterCommand } from '../../commands/sheets-filter.command';
 import { CloseFilterPanelOperation, OpenFilterPanelOperation } from '../../commands/sheets-filter.operation';
-import { ClearFilterConditionsMenuItemFactory, ReCalcFilterMenuItemFactory, SmartToggleFilterMenuItemFactory } from '../sheets-filter.menu';
+import { ClearFilterCriteriaMenuItemFactory, ReCalcFilterMenuItemFactory, SmartToggleFilterMenuItemFactory } from '../sheets-filter.menu';
 
 const TEST_WORKBOOK_DATA_DEMO: IWorkbookData = {
     id: 'test',
@@ -161,7 +161,7 @@ describe('test sheet filter menu items', () => {
     it('should "ClearSheetsFilterCriteriaCommand" be enabled when there is filter criteria', () => {
         let disabled = false;
 
-        const menuItem = get(Injector).invoke(ClearFilterConditionsMenuItemFactory);
+        const menuItem = get(Injector).invoke(ClearFilterCriteriaMenuItemFactory);
         disposableCollection.add(menuItem.disabled$!.subscribe((value) => (disabled = value)));
         expect(disabled).toBeTruthy();
 

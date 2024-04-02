@@ -18,7 +18,7 @@ export default {
     'sheets-filter': {
         toolbar: {
             'smart-toggle-filter-tooltip': 'Toggle Filter',
-            'clear-filter-conditions': 'Clear Filter Conditions',
+            'clear-filter-criteria': 'Clear Filter Conditions',
             're-calc-filter-conditions': 'Re-calc Filter Conditions',
         },
         shortcut: {

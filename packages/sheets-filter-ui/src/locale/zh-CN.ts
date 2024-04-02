@@ -20,7 +20,7 @@ const zLocale: typeof enUS = {
     'sheets-filter': {
         toolbar: {
             'smart-toggle-filter-tooltip': '切换筛选',
-            'clear-filter-conditions': '清除筛选条件',
+            'clear-filter-criteria': '清除筛选条件',
             're-calc-filter-conditions': '重新计算',
         },
         shortcut: {

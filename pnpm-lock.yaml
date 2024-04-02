@@ -1104,7 +1104,7 @@ importers:
   packages/sheets-filter-ui:
     dependencies:
       '@univerjs/icons':
-        specifier: ^0.1.29
+        specifier: ^0.1.42
         version: 0.1.42(react-dom@18.2.0)(react@18.2.0)
       rc-virtual-list:
         specifier: ^3.11.4
