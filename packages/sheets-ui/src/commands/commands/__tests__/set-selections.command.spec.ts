@@ -126,10 +126,10 @@ describe('Test commands used for change selections', () => {
         return worksheet.getColumnCount();
     }
 
-    function getRowVisible(row: number): boolean {
+    function getRowRawVisible(row: number): boolean {
         const workbook = get(IUniverInstanceService).getCurrentUniverSheetInstance();
         const worksheet = workbook.getActiveSheet();
-        return worksheet.getRowVisible(row);
+        return worksheet.getRowRawVisible(row);
     }
 
     function getColVisible(col: number): boolean {

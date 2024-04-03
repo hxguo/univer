@@ -475,7 +475,7 @@ export class SheetFindModel extends FindModel {
             const { startX, startY } = startPosition;
             const { endX, endY } = endPosition;
 
-            const rowHidden = !worksheet.getRowVisible(startRow);
+            const rowHidden = !worksheet.getRowRawVisible(startRow);
             const columnHidden = !worksheet.getColVisible(startColumn);
 
             const inHiddenRange = rowHidden || columnHidden;

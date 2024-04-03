@@ -374,7 +374,7 @@ export class ByValuesModel extends Disposable implements IFilterByModel {
             while (rowIndex < rowSpan) {
                 const targetRow = row + rowIndex;
 
-                if (filteredOutRowsByOtherColumns.has(targetRow) || !rowManager.getRowVisible(targetRow)) {
+                if (filteredOutRowsByOtherColumns.has(targetRow) || !rowManager.getRowRawVisible(targetRow)) {
                     rowIndex++;
                     continue;
                 }

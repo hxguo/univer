@@ -1032,7 +1032,7 @@ export function ShowRowMenuItemFactory(accessor: IAccessor): IMenuButtonItem {
 
         return !!rowRanges?.some((range) => {
             for (let r = range.startRow; r <= range.endRow; r++) {
-                if (!worksheet.getRowVisible(r)) {
+                if (!worksheet.getRowRawVisible(r)) {
                     return true;
                 }
             }

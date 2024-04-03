@@ -50,10 +50,10 @@ describe('Test SheetInterceptorService', () => {
         return sheet.getRowFiltered(row);
     }
 
-    function getRowVisible(row: number): boolean {
+    function getRowRawVisible(row: number): boolean {
         const univerInstanceService = get(IUniverInstanceService);
         const sheet = univerInstanceService.getCurrentUniverSheetInstance().getActiveSheet()!;
-        return sheet.getRowVisible(row);
+        return sheet.getRowRawVisible(row);
     }
 
     describe('Test intercepting getting cell content', () => {
@@ -113,13 +113,13 @@ describe('Test SheetInterceptorService', () => {
             });
 
             expect(getRowFiltered(1)).toBeFalsy();
-            expect(getRowVisible(1)).toBeTruthy();
+            expect(getRowRawVisible(1)).toBeTruthy();
 
             realFiltered = true;
             expect(getRowFiltered(1)).toBeTruthy();
-            expect(getRowVisible(1)).toBeFalsy();
+            expect(getRowRawVisible(1)).toBeFalsy();
             expect(getRowFiltered(2)).toBeFalsy();
-            expect(getRowVisible(2)).toBeTruthy();
+            expect(getRowRawVisible(2)).toBeTruthy();
         });
     });
 

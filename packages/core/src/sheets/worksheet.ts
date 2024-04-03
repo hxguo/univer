@@ -444,8 +444,25 @@ export class Worksheet {
         return this.getRowManager().getRowHeight(row);
     }
 
+    /**
+     * Get if the row in visible. It may be affected by features like filter and view.
+     * @param row the row index
+     * @returns if the row in visible to the user
+     */
     getRowVisible(row: number): boolean {
-        return this.getRowManager().getRowVisible(row);
+        const filtered = this._viewModel.getRowFiltered(row);
+        if (filtered) return false;
+
+        return this.getRowRawVisible(row);
+    }
+
+    /**
+     * Get if the row does not have `hidden` property.
+     * @param row the row index
+     * @returns if the row does not have `hidden` property
+     */
+    getRowRawVisible(row: number): boolean {
+        return this.getRowManager().getRowRawVisible(row);
     }
 
     getHiddenRows(start?: number, end?: number): IRange[] {

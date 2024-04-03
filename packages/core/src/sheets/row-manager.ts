@@ -114,7 +114,7 @@ export class RowManager {
         let startRow = -1;
 
         for (let i = start; i <= end; i++) {
-            const visible = this.getRowVisible(i);
+            const visible = this.getRowRawVisible(i);
             if (inHiddenRange && visible) {
                 inHiddenRange = false;
                 hiddenRows.push({
@@ -150,7 +150,7 @@ export class RowManager {
         let startRow = -1;
 
         for (let i = start; i <= end; i++) {
-            const visible = this.getRowVisible(i);
+            const visible = this.getRowRawVisible(i);
             if (inVisibleRange && !visible) {
                 inVisibleRange = false;
                 visibleRows.push({
@@ -173,7 +173,7 @@ export class RowManager {
         return visibleRows;
     }
 
-    getRowVisible(row: number): boolean {
+    getRowRawVisible(row: number): boolean {
         const rowData = this.getRow(row);
         if (!rowData) {
             return true;

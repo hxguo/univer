@@ -1464,14 +1464,14 @@
       "updated": 1709529729061,
       "link": null,
       "locked": false,
-      "text": "getRowVisible?",
+      "text": "getRowRawVisible?",
       "fontSize": 20,
       "fontFamily": 1,
       "textAlign": "center",
       "verticalAlign": "middle",
       "baseline": 18,
       "containerId": "4sD4NnxsLDc3_sGQDhM5k",
-      "originalText": "getRowVisible?",
+      "originalText": "getRowRawVisible?",
       "lineHeight": 1.25
     },
     {

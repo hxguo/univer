@@ -1635,7 +1635,7 @@ export class SpreadsheetSkeleton extends Skeleton {
             return true;
         }
 
-        const hidden = this._worksheet.getColVisible(c) === false || this._worksheet.getRowVisible(r) === false;
+        const hidden = this._worksheet.getColVisible(c) === false || this._worksheet.getRowRawVisible(r) === false;
         if (hidden) {
             const { isMerged, isMergedMainCell } = getCellInfoInMergeData(
                 r,
